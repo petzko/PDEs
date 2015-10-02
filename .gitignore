@@ -1,0 +1,6 @@
+### ignore latex aux files, log files, toc files and temp files ### 
+*.log
+*.aux
+*.toc
+*~
+1*
