@@ -1,0 +1,188 @@
+\chapter{Characterisation of partial differential equations}
+
+In its most general form, a partial differential equation (PDE) can be written as:
+
+
+\begin{equation}
+  \label{eq:pdegeneral}
+  f(x_1,x_2\cdots x_n, \frac{\partial u}{\partial x_1},\cdots, \frac{\partial u}{\partial x_n}, \frac{\partial^2 u}{\partial x_1^2 },\cdots,\frac{\partial^2 u}{\partial x_1 \partial x_n},\cdots, \frac{\partial^k u}{\partial x_{i_1} \cdots \partial x_{i_k} }, \cdots) = 0,
+\end{equation}
+where $u(x_1,\cdots,x_n)$ is a function of the independent variables $x_i$ and $f(\cdot)$ is some function of  $\{x_i\}_{i=1\cdots n}$, $u$ and its derivatives of arbitrary order. There are a few general criteria which characterize the equation 
+Eq. (\ref{eq:pdegeneral}).
+
+\begin{itemize}
+  \item The order of the equation is determined by the highest order derivative of $u$ found in the expression (\ref{eq:pdegeneral}), i.e. if the derivative of highest order has order $k$, then the PDE is called to be of k$^\text{th}$ order. 
+  \item If $f$ is a linear function of $u$ and its derivatives then the equation is called linear, if it is linear only in the highest partial derivatives of $u$ then the equation is called quasilinear.
+  \item If $f$ does not explicitly depend on the independent variables $\{x_i\}_{i=1\cdots n}$, then Eq. (\ref{eq:pdegeneral}) is called homogeneous, otherwise it is inhomogeneous. 
+\end{itemize}
+
+As we already saw in the previous chapter, in electrical engineering and physics one most often encounters partial differential equations of first and second order. In that sense, we will dedicate this and the rest of the lectures namely onto such partial differential equations and learn how to determine their type, supply conditions so that a unique solution exists, and we will even go as far as demonstrating analytical solutions of PDEs in cases where such are known. In practical engineering and scientific problems, however, analytical solutions rarely exits, so one is often forced to develop a numerical solution on a computer. More on that topic will be discussed in later chapters of these notes. 
+
+\section{Quasilinear partial differential equations of second order}
+
+A quasilinear partial differential equation of second order with two independent variables can be most generally written as:
+\begin{equation}
+  \label{eq:pdesecondorder}
+  A\frac{\partial^2 u}{\partial x^2}+2B\frac{\partial ^2u}{\partial x \partial y}+C\frac{\partial^2 u}{\partial y^2} = F(u,\frac{\partial u}{\partial x},\frac{\partial u}{\partial y},x,y), 
+\end{equation}
+with $A,B $ and $C$ some coefficients, which could also depend on the coordinate variables $(x,y)$.
+\subsection{Cauchy's boundary value problem}
+
+A differential equation, be it ordinary or partial such, has in general an infinite number of solutions. In the theory of ODEs, for example, 
+one often faces the task to find a ``general formula'' for the solution of the posed problem which depends on a number of numerical constants, as many 
+as the order of the original problem. In that sense the task of finding the solution of a concrete problem, i.e. the ODE together with a set of initial conditions, reduces to a 
+simple algebraic task of solving a system of equations for the unknown constants. In the area of partial differential equations, however, it is often the case that it is either impossible 
+to find such a ``general formula'' or even if it were, then the unknown parameters are not simple constants, but functions, so that the task of finding a solution which satisfies both the original PDE as 
+well as the auxilliary conditions is often the main difficulty at hand. Therefore, repeating the famous French mathematician Jacques Hadamard, we can formulate the central problem in the theory of partial differential 
+equations as follows:
+\begin{displayquote}
+The true questions which actually lie before us are, therefore, the ``boundary problems'', each of which consists in determining an unknown function $u$ so as to satisfy:
+\begin{enumerate}
+  \item an ``indefinite'' partial differential equation; 
+  \item some ``definite'' boundary conditions; 
+\end{enumerate}
+Such a problem will be ``correctly set'' if those accessory conditions are such as to determine one and only one solution of the indefinite equation.
+\end{displayquote}
+
+It is now clear that not every set of auxilliary conditions will lead to a solution, for the PDE itself imposes limitations on the allowed boundary data. From an engineering and physics perspective, however, 
+we are interested in a specific solution to our equation, one corresponding to a real world problem. It is therefore a vital importance to have some criteria of determining which problem is well-posed, in the sense that a solution exists and it is unique. Furthermore we could also require that our unique solutions are stable, in as much as if we perturbe the auxilliary data a little, the new solution will remain close to the original one. This requirement stems more or less from practical considerations, as it is often that results of experiments in engineering and physics are not exact values, but good enough approximations. Therefore, finally, we will define a well-posed problem in the theory of partial differential equations as a problem which:
+\begin{itemize}
+  \item has a solution and it is unique,
+  \item the solution is stable with respect to perturbation of the initial conditions.  
+\end{itemize}
+
+Another French mathematician, Augustin Cauchy, was the first to correctly define the problem of existence and uniqueness of a solution of a given PDE, a probelm which will be further refered to as the \textit{Cauchy problem}. \\\\
+\emph{Cauchy problem}:\\
+Let us take the following second order quasilinear PDE:
+\begin{equation}
+  \label{eq:quasilinearpde}
+  A \frac{\partial ^2 u}{\partial x^2} +2B \frac{\partial ^2 u}{\partial x \partial y} +  C \frac{\partial ^2 u}{\partial y^2} = F(x,y,u,\frac{\partial u}{\partial x},\frac{\partial u}{\partial y}), 
+\end{equation}
+where the coefficients $A,B$ and $C$ can, in general, vary with the independent variables $(x,y)$. Let us also have the following boundary data:
+\begin{equation}
+  \label{eq:cauchydata}
+  \begin{cases}
+  u(l)  = u_0(l), \\ 
+  \\
+  \frac{\partial u(l)}{\partial n} = u_1(l) ,
+\end{cases}
+\end{equation}
+where $\Gamma : (x(l),y(l)) $ is a parametrization of a curve, defined in the $xy$-plane, and $ \frac{\partial u(l)}{\partial n} $ is the directional derivative of $u$ along any direction except tangential to $\Gamma$.
+
+Now, given this boundary data we can calculate the tangential component of $u$, $\frac{\partial u(l)}{\partial l}$, along $\Gamma$, and together with $u_1(l)$ we can obtain $\frac{\partial u}{\partial x}$ and $\frac{\partial u}{\partial y}$. Let us set for simplicity:
+\begin{equation}
+  \label{eq:derivativesymbols}
+  p(l) = \frac{\partial u(l)}{\partial x}, \hspace{0.3cm} q(l) =  \frac{\partial u(l)}{\partial y},  \hspace{0.3cm} r(l) =  \frac{\partial^2 u(l)}{\partial x^2},  \hspace{0.3cm} s(l) =  \frac{\partial^2 u(l)}{\partial x \partial y} \text{ and } t(l) =  \frac{\partial^2 u(l)}{\partial y^2}.
+\end{equation}
+Then, we can write the original PDE, Eq. \ref{eq:quasilinearpde} as:
+\begin{equation}
+  \label{eq:quasilinearpde_parametric}
+   A r +2B s +  C t = F(x,y,u,p,q), 
+\end{equation} 
+with a known right hand side. Furthermore, differentiating $p$ and $q$:
+\begin{align*}
+  \frac{d p}{d l} &= r\frac{d x}{d l} + s\frac{d y}{d l}, \\  
+  \frac{d q}{d l} &= s\frac{d x}{d l} + t\frac{d y}{d l}, \\  
+\end{align*}
+gives us, together with Eq. (\ref{eq:quasilinearpde}), a system of 3 equations for the 3 unknowns $r,s$ and $t$. It is evident that a unique solution for this system will exist if the determinant:
+\begin{equation}
+  \label{eq:characteristicsdet}
+  \left| \begin{array}{ccc} A & 2B & C\\ \frac{dx}{dl} &  \frac{dy}{dl} & 0 \\  0 & \frac{dx}{dl} &  \frac{dy}{dl} \end{array} \right | = A (\frac{dy}{dl})^2 -2B \frac{dx}{dl}\frac{dy}{dl} +C(\frac{dx}{dl})^2 \neq 0. 
+\end{equation}
+
+The above equation defines at most two families of curves in the $xy-$plane, called the characteristic curves, with a slope given by:
+\begin{equation}
+  \label{eq:characteristicsslope}
+  \frac{dy}{dx} = \frac{B-\sqrt{B^2-AC}}{A}.
+\end{equation}
+Since Eq. (\ref{eq:characteristicsslope}) does not depend on the type of boundary data, but only on the coefficients $A,B $ and $C$ of the original equation, this gives us a formal demarcation criteria for  different types of second order quasilinear PDEs. More specifically, in analogy with analytical geometry, we can define the following PDE types with respect to the sign of the determinant of Eq. (\ref{eq:characteristicsdet}).\\
+Thus, if
+\begin{enumerate}
+  \item{$B^2-AC>0 \rightarrow$  we say that the equation is of ``hyperbolic type'',}
+  \item{$B^2-AC=0 \rightarrow$  we say that the equation is of ``parabolic type'',}
+  \item{$B^2-AC<0 \rightarrow$  we say that the equation is of ``elliptic type''.}
+\end{enumerate}
+
+Additionally, from Eq. (\ref{eq:characteristicsdet}), we can obtain necessary conditions for the existance of a solution of the Cauchy problem,: 
+\begin{displayquote}
+  A necessary condition for the existance of a solution of the \emph{Cauchy problem}, Eq. (\ref{eq:quasilinearpde}-\ref{eq:cauchydata}), is that the boundary curve $\Gamma$, on which the boundary data is specified, shall nowhere have common linear elements with a characteristic of the original equation, $\gamma_{char}$.
+\end{displayquote} 
+In order for the above condition to be sufficient, additional requirements for analyticity of the boundary data have to be imposed, and will not be concidered here. In mathematical literature, the formulation for necessary and sufficient conditions for the existance of a unique solution to the Cauchy problem is famously known as Cauchy-Kovalevskaya theorem, and it is of central importance in the theory of partial differential equations. 
+
+It is also worthwhile to mention that this condition does not mean that $\Gamma$ cannot \emph{intersect} with a characteristic, as there are in general infinitely many such curves, but rather that the boundary curve must not ``overlap'' with $\gamma_{char}$ in the sense that at no point those two curves shall have the same tangential vector. An example for an ill-defined Cauchy problem, which will illustrate the mentioned so far is presented in what follows. 
+
+Take the equation:
+\begin{align}
+  \label{eq:examplelinearpde}
+    & A \frac{\partial ^2 u}{\partial x^2} +2B \frac{\partial ^2 u}{\partial x \partial y} +  C \frac{\partial ^2 u}{\partial y^2} =0, \nonumber \\ 
+    & u(x,\sigma x) = g(x) \nonumber \\
+    & \frac{\partial u(x,\sigma x)}{\partial y} = f(x) \text{, with } \sigma = \frac{B+\sqrt{B^2 - AC}}{A}. 
+\end{align}
+with $A,B$ and $C$ some constants. Then using notation from (\ref{eq:derivativesymbols}) we can calculate:
+\begin{subequations}
+\begin{align}
+  \frac{\partial u}{\partial x} &= p = g'-\sigma f, \\
+  \frac{\partial u}{\partial y} &= f, \\ 
+  \frac{d p}{d x} &= r +\sigma s = u_{xx}+\sigma u_{xy} = g''-\sigma f', \label{eq:example_p}\\ 
+  \frac{d q}{d x} &= s +\sigma t = u_{xy}+\sigma u_{yy} = f',  \label{eq:example_q}
+\end{align}
+\end{subequations}
+Now, using Eq. (\ref{eq:example_p}-\ref{eq:example_q}) and substituting in Eq. (\ref{eq:examplelinearpde}), we get: 
+\begin{equation*}
+  \left ( A - \frac{2B}{\sigma} + \frac{C}{\sigma^2} \right ) u_{xx} = G(f',g''),
+\end{equation*}
+where $G$ is some known function, the exact form of which is not interesting for us at the moment. It can be easily seen that if $\sigma$ is as defined in Eq. (\ref{eq:examplelinearpde}), then the above term in brackets is identically zero, which cannot be satisfied with arbitrary Cauchy data $g $ and $f$. In that case, we have a badly defined problem to whcich a stable and unique solution does not exist.
+\subsection{Canonic normal form of quasilinear PDEs of second order}
+Similar to canonization of a quadratic form, a quasilinear PDE of second order can also be simplified substantially by a simple change of basis. This cannonization procedure is common for all equations of the same type, and is performed by a suitable coordinate transformation. Here, another aspect of the characteristics of a PDE will soon become aparent. 
+
+As we have already seen, every second order quasilinear PDE determines at most two families of curves in the $xy-$plane, i.e. the curves $\phi(x,y) = \text{Const}$ and $\psi(x,y) = \text{Const}$, with slopes defined by Eq. (\ref{eq:characteristicsslope}). Below we will summarize the coordinate transformation procedures for partial differential equations of each type and the resulting canonic normal form.\\\\
+\emph{Hyperbolic equations}\\
+For hyperbolic PDEs, since $B^2-AC > 0$, we have two distinct families of characteristic curves, namely those defined by:
+\begin{align*}
+  \phi(x,y) &= \text{Const}, \\
+  \psi(x,y) &= \text{Const}. 
+\end{align*}
+In this case one employs the coordinate transformation:
+\begin{equation*}
+  \epsilon =  \phi(x,y), \hspace{2cm}  \eta = \psi(x,y).
+\end{equation*}
+One can then show that, in the new coordinates,  the original PDE, Eq. (\ref{eq:quasilinearpde}), transforms to:
+\begin{equation*}
+  \frac{\partial^2 u}{\partial \epsilon \partial \eta} = F'(\epsilon,\eta,u,\frac{\partial u}{\partial \epsilon},\frac{\partial u}{\partial \eta}).
+\end{equation*}
+
+Alternative ``canonization'' of Eq. (\ref{eq:quasilinearpde}) for equations of hyperbolic type can be obtained by choosing:
+\begin{equation*}
+  \epsilon' =\phi(x,y) + \psi(x,y), \hspace{2cm}  \eta' = \phi(x,y) - \psi(x,y).
+\end{equation*} 
+In this basis, the normalized PDE reads:
+\begin{equation*}
+  \frac{\partial^2 u}{\partial \epsilon'^2 } -\frac{\partial^2 u}{\partial \eta'^2 }  = F''(\epsilon',\eta',u,\frac{\partial u}{\partial \epsilon'},\frac{\partial u}{\partial \eta'}), 
+\end{equation*} 
+from where the analogy with a hyperbolic cross-section is immidiately evident.\\\\
+\emph{Parabolic equations}\\
+In the parabolic case, $B^2-AC = 0$, we have only one family of characteristic curves $\phi(x,y) = \text{Const}$. Then one employs the substitution:
+\begin{equation*}
+  \epsilon =  \phi(x,y), \hspace{2cm}  \eta = x, 
+\end{equation*}
+which recasts Eq. (\ref{eq:quasilinearpde}) into the following form:
+\begin{equation*}
+  \frac{\partial^2 u}{\partial \eta^2 } =  F'(\epsilon,\eta,u,\frac{\partial u}{\partial \epsilon},\frac{\partial u}{\partial \eta}).
+\end{equation*}\\\\
+\emph{Elliptic equations}\\
+Lastly, for elliptic PDEs ($B^2-AC = 0$), we have two complex conjugate families of characteristics. We obtain the transformation:
+\begin{equation*}
+  \epsilon =  \Re\{ {\phi(x,y)} \} = \Re\{ {\psi(x,y)} \}, \text{ and }  \eta = \Im \{ {\phi(x,y)} \} = - \Im\{ {\psi(x,y)} \},
+\end{equation*}
+and the corresponding cannonic form:
+\begin{equation*}
+  \frac{\partial^2 u}{\partial \epsilon^2 } +   \frac{\partial^2 u}{\partial \eta^2 } =  F'(\epsilon,\eta,u,\frac{\partial u}{\partial \epsilon},\frac{\partial u}{\partial \eta}).
+\end{equation*}
+
+Now we can see already that the fundamental equations in electrical engineering, discussed in the previous chapter, are already in a canonic normal form. Therefore we can classify them as follows:
+\begin{itemize}
+  \item ``Potential equation'', e.g. Eq. (\ref{eq:possonequation}), $\rightarrow$ is of elliptic type. 
+  \item ``wave equation'', e.g. Eq. (\ref{eq:electricwavebase}), $\rightarrow$ is of hyperbolic type.
+  \item ``diffusion equation'', e.g. Eq. (\ref{eq:diffusionequation}),  $\rightarrow$ is of parabolic type.
+\end{itemize}
+

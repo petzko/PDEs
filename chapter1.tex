@@ -1,0 +1,318 @@
+
+\chapter{Important partial differential equations in electrical engineering} 
+\section{Electrodynamics}
+\subsection{Electromagnetic fields}
+\textbf{Maxwell's equations:} 
+\\
+Consider the following set of equations: 
+\begin{alignat}{3}
+  rot ( \bm{H} ) &= \bm{j}+\frac{\partial \bm{D}}{\partial t} &\hspace{0.5cm} &\text{ (Ampere's law)} &\hspace{2cm} div (\bm{B}) &= 0 \label{eq:amperelaw}\\
+  rot ( \bm{E} ) &= -\frac{\partial \bm{B}}{\partial t} &\hspace{0.5cm} &\text{(Faraday's law)} &\hspace{2cm} div (\bm{D}) &= \rho \label{eq:faradaylaw}. 
+\end{alignat}
+with the constitutive (i.e. material specific) equations: 
+\begin{alignat}{3}
+  \label{eq:constitutiveequations}
+   rot  ( \bm{B} ) &= \mu \bm{H} &\hspace{1cm}  \bm{D} &= \epsilon \bm{E} &\hspace{1cm}  \bm{j} &= \sigma \bm{E} \\
+\end{alignat}
+Above with $\bm{E},\bm{D}, \bm{H}$ and $\bm{B}$, we have denoted the electric field, the electric displacement field, the magnetic field, and the magnetic induction, respectively. Furthermore, $\mu ,\epsilon ,\bm{j} $ and $\rho$ denote the magnetic permiability, the electric permittivity, the current flux density and the conductivity, respectively. The elegant set of equations, Eq. (\ref{eq:amperelaw}-\ref{eq:constitutiveequations}), are the famous Maxwell's equations and are the fundamental laws that govern physical processes in electrical and communications engineering, optics and many other areas of science.\\
+
+Formally, we can rewrite the gradient, the divergence and the rotor (curl in english) operators using the Nabla vector operator ($\Nabla$):
+\begin{align*}
+  & \Nabla \Phi(\bm{r})  = grad (\Phi( \bm{r} )) \\
+  & \div \bm{A}(\bm{r}) = div (\bm{A}(\bm{r})) \\ 
+  & \curl \bm{A}(\bm{r}) = rot (\bm{A}( \bm{r} )).
+\end{align*}
+The following identities hold:\\\\
+\textbf{Curl of the gradient}:
+\begin{equation}
+  \label{eq:curlofgradient}
+  \curl (\Nabla\Phi) = 0 .
+\end{equation}
+\textbf{Divergence of the curl}:
+\begin{equation}
+  \label{eq:divergenceofcurl}
+  \div (\curl \bm{A}) = 0 .
+\end{equation}
+\textbf{Divergence of the gradient}:
+\begin{equation}
+  \label{eq:divergenceofgradient}
+  \div (\Nabla \Phi) = \Nabla^2 \Phi = \lap \Phi.
+\end{equation}
+Where $\lap$ is the \emph{scalar} Laplacian operator. 
+\textbf{Curl of the curl}:
+\begin{equation}
+  \label{eq:curlofcurl}
+  \curl (\curl \bm{A}) = \Nabla (\div \bm{A})-\vlap \bm{A}. 
+\end{equation}
+Where $\vlap$ is the \emph{vector} Laplacian operator, i.e. the Laplacian applied on a vector. 
+\\
+
+In cartesian coordinates the gradient and the Laplacian (scalar and vector) are defined as follows: 
+\begin{itemize}
+  \item $\Nabla = \x \frac{\partial}{\partial x} + \y \frac{\partial}{\partial y}+\z\frac{\partial}{\partial z}$ ,
+  \item $\lap V(x,y,z) = \frac{\partial^2 V}{\partial^2 x}+\frac{\partial^2 V}{\partial^2 y} +\frac{\partial^2 V}{\partial^2 y}$ ,
+  \item $\vlap \bm{A}(x,y,z) =\x ( \frac{\partial^2 A_x}{\partial^2 x}+\frac{\partial^2 A_x}{\partial^2 y} +\frac{\partial^2 A_x}{\partial^2 y}) + \y(\frac{\partial^2 A_y}{\partial^2 x}+\frac{\partial^2 A_y}{\partial^2 y} +\frac{\partial^2 A_y}{\partial^2 y})+\z(\frac{\partial^2 A_z}{\partial^2 x}+\frac{\partial^2 A_z}{\partial^2 y} +\frac{\partial^2 A_z}{\partial^2 y}).$
+\end{itemize}
+
+In cylindrical coordinates ($x=r\cos\phi$, $y = r\sin\phi$, $z = z$): 
+\begin{itemize}
+  \item {$\Nabla = \hat{\bm {r}} \frac{\partial }{\partial r}+\hat{\bm{\phi}} \frac{1}{r}\frac{\partial}{\partial \bm{\phi}} + \hat{\bm{z}}\frac{\partial}{\partial z} $} ,
+  \item {$\lap V(r,\phi,z) = \frac{1}{r}\frac{\partial}{\partial r}\left ( \frac{1}{r}\frac{\partial V}{\partial r}\right ) + \frac{1}{r^2}\frac{\partial ^2 V}{\partial \phi ^2} + \frac{\partial ^2 V }{\partial z^2} $.}
+\end{itemize}
+
+In spherical coordinates ($x=r\cos\phi \sin\theta$, $y = r\sin\phi\sin\theta$, $z = r\cos\theta$):
+\begin{itemize}
+  \item{$\Nabla = \hat{\bm{r}} \frac{\partial }{\partial r}+\frac{1}{r\sin\theta}\hat{\bm{\phi}} \frac{\partial}{\partial \phi} + \frac{1}{r}\hat{\bm{\theta}}\frac{\partial}{\partial \theta}$} ,
+  \item{$\lap V(r,\phi,z) = \frac{1}{r^2}\frac{\partial}{\partial r}\left ( r^2\frac{\partial V}{\partial r}\right ) + \frac{1}{r^2 \sin^2\theta}\frac{\partial ^2 V}{\partial \phi ^2}
+    + \frac{1}{r^2\sin\theta} \frac{\partial}{\partial \theta}\left ( \sin\theta \frac{\partial V}{\partial \theta } \right ) $.} 
+\end{itemize}
+
+Notice that the vector Laplacian in both cylindrical and spherical coordinates does not simply ammount to component-wise application of the scalar Laplacian to each of the transformed vector compoments of $\bm{A} = (A_r,A_\phi,A_\theta)$. This is because the coordinate transform also alters the components of $\bm{A}$ i.e. $T: (A_x,A_y,A_z)\rightarrow (A_r,A_\phi,A_\theta)$. More on that later. 
+\\\\
+\textbf{a)} \emph{Statics} \\
+
+Static is the sub-branch of electrodynamics where it is assumed that the electric and magnetic fields do not change with time, i.e. $\partial D / \partial t = 0 $ and $\partial B / \partial t = 0 $ , as well as vanishing current density  $\bm{j} = 0 $. It can be easily seen that in this situation Maxwell's equations can be decoupled into independent electric field and magnetic field equations. Let us see what we have in mind in the following. 
+
+
+Assume all time derivatives vanish, i.e. $\frac{\partial }{\partial t} = 0  $, then from Maxwell's curl equation (Faraday's equation), it follows that $\curl \bm{E} = 0 $, which means that the electric field is irrotational and from the
+identity, Eq. (\ref{eq:curlofgradient}), it follows that there exists a scalar field $V$ such that:
+\begin{equation*}
+  \bm{E}=-\Nabla V, 
+\end{equation*}
+where $V$ is called electorstatic potential function. Plugging this into the divergence equation for the electric displacement field, and assuming constant permittivity:
+
+\begin{equation*}
+  \div \bm{D} = \div \left ( \epsilon \vec {E} \right ) = \rho \rightarrow \div \bm{E} = -\lap {V}=\frac{\rho}{\epsilon}.
+\end{equation*}
+The last of the above terms is famously called \emph{Poisson's equation} and the particular case when there are no free charges, $\rho = 0 $, we obtain \emph{Laplace's equation}.
+\begin{alignat}{2}
+  \lap V(x,y,z) &= -\frac{\rho}{\epsilon}  &\quad\quad\quad &\text{"Poisson's equation"}  \label{eq:possonequation}\\
+  \lap V(x,y,z) &= 0  &\quad\quad\quad &\text{"Laplace's equation"} \label{eq:laplaceequation}
+\end{alignat}
+\\ 
+
+As for the magnetic field again we assume that $ \frac{\partial}{\partial t} = 0 $ and let us further take that $\mu = \text{const}$. We can satisfy the divergence equation ($\div \bm{B} = 0 $) for the magnetic field, $\bm{B}$, if we assume that there exists a vector field $\bm{A}$, called the vector potential, which satisfies the relation: 
+\begin{equation*}
+  \bm{B} = \curl \bm{A}.
+\end{equation*}
+Plugging this into the Ampere's equation, Eq. (\ref{eq:amperelaw}), and using the identity Eq. (\ref{eq:curlofcurl}), we can derive an equation for the vector potential: 
+\begin{equation*}
+  \curl (\curl \bm{A}) \equiv \Nabla(\div \bm{A})-\vlap{\bm{A}} = 0.
+\end{equation*}
+Here $\vlap$ is the \emph{vector} Laplacian operator, which operates on a vector and produces a vector. Important thing to notice here is that the magnetic field $\bm{B}$ is not uniquely determined from the vector potential $\bm{A}$, since $\div{\bm{B}}=0$ will be satisfied for any $\bm{A'} = \bm{A}+\Nabla{\Xi(\bm{r},t)}$ with $\Xi(\bm{r},t)$ an arbitrary scalar field, also known as a gauge function. This additial degree of freedom in uniquely defining $\bm{A}$ allows us to choose the scalar field $\Xi$ in such a way that the equations are maximally simplified, also known as a gauge transformation. When we choose $\Xi$ such that $\div \bm{A} = 0 $ holds, it is said that the electromagnetic field is in the Coulomb gauge. We can always transform an arbitrary vector potential $\bm{A'}$ into the Coulomb gauge by using a gauge function that satisfies $\lap \Xi = \div \bm{A'}$. Therefore, without loss of generality we can assume that $\div {\bm{A}= 0 }$ and hence:
+\begin{equation*}
+  \vlap \bm{A} = 0.
+\end{equation*}
+As mentioned above the vector Laplacian transforms a vector into a vector and in Cartesian coordinates it is simply a component-wise appilcation of the scalar Laplacian onto the components of $\bm{A}$. However in different coordinate systems this is not the case as will be illustrated below. For brevity we will only give the Laplacian in cylindrical coordinates, whereas we leave the derivation in spherical coordinates to the reader (for the derivation it is best to use the identiy: $\vlap \bm{A} = \Nabla (\div{\bm{A}}-\curl(\curl \bm{A})$).
+
+\begin{equation*}
+  \vlap \bm{A} =
+  \begin{pmatrix} 
+    \lap A_r - \frac{1}{r^2}A_r-\frac{2}{r^2}\frac{\partial A_\phi}{\partial \phi} \\ \\
+    \lap A_\phi - \frac{1}{r^2}A_\phi-\frac{2}{r^2}\frac{\partial A_r}{\partial \phi} \\ \\    
+    \lap A_z
+  \end{pmatrix}
+\end{equation*}  
+In the above formula $\lap$ denotes the \emph{scalar} Laplacian operator. \\ 
+(TODO: CHECK THIS FORMULA!!! MIGHT BE WRONG!!!)\\\\
+\textbf{b)} \emph{Stationary electric field.} \\
+
+When we maintain the temporal invariance ($\frac{\partial}{\partial t}=0$) of the electric and the magnetic fields, however assume the existence of a time independent current flux density, i.e. $\bm{j}(\bm{r}) \neq 0 $, it follows that we can no longer separate the electric and magnetic fields into independent set of equations. The fields couple through Ampere's law and the constitutive equations as follows:
+\begin{align*}
+  \curl \bm{H} &= \bm{j}\\
+  \bm{j} &= \sigma \bm{E}. 
+\end{align*}
+Furthermore, from the fact that the divergence of the curl of any vector field is identically zero we find that (for constant, non-vanishing $\sigma$): 
+\begin{equation*}
+  \div (\curl \bm{H}) = \div \bm{j} = \frac{1}{\sigma}\div \bm{E} = 0. 
+\end{equation*}
+From this it follows that the electrostatic potential function, defined as $\bm{E}=-\Nabla V$, satisfies Laplace's equation:
+\begin{equation*}
+  \div \bm{E} = \div (-\Nabla V) = -\lap V = 0. 
+\end{equation*}\\\\
+\textbf{c)} \emph{Electromagnetic waves}\\
+
+Now, let us allow for the electromagnetic fields to vary in time and let us assume that: $\epsilon = \text{const}$, $\mu = \text{const}$, $\sigma = \text{const}$ and finally $\rho = 0$. This corresponds to a linear
+medium with zero free charges. We can eliminate the magnetic field from Faraday's law by taking the curl of both sides of the equation and substituting in Ampere's equation:
+\begin{equation*}
+  \curl (\curl \bm{E}) = \Nabla(\div \bm{E})-\vlap \bm{E} = -\mu \Nabla \frac{\partial \bm{H}}{\partial t} = -\mu\sigma\frac{\partial \bm{E}}{\partial t}-\mu\epsilon \frac{\partial^2 \bm{E}}{\partial t^2}.
+\end{equation*} 
+Furthermore, using the fact that in our current framework the electric field is a solenoidal, i.e. divergenless ($\div \bm{E} = 0 $), vector field we come up with the equation: 
+\begin{equation}
+  \label{eq:electricwavebase}
+  \vlap\bm{E} =  \mu\sigma\frac{\partial \bm{E}}{\partial t}+\mu\epsilon \frac{\partial^2 \bm{E}}{\partial t^2}.
+\end{equation}
+Symetrically one can derive the same equation for the magnetic field $\bm{H}$:
+\begin{equation}
+  \label{eq:magneticwavebase}
+  \vlap\bm{H} =  \mu\sigma\frac{\partial \bm{H}}{\partial t}+\mu\epsilon \frac{\partial^2 \bm{H}}{\partial t^2}.
+\end{equation}
+\\\\
+\textbf{Special cases}:\\
+
+For an insulator $\sigma = 0$ we simply obtain the classical wave equation:
+\begin{equation*}
+  \vlap \bm{E} = \mu\epsilon \frac{\partial^2 \bm{E}}{\partial t^2},
+\end{equation*}
+where $1/\sqrt{\mu\epsilon} = c$ is the velocity of light inside the material. \\
+
+For a metalic conductor where $\sigma \gg \omega \epsilon$ holds, we can neglect the second order derivative term to obtain three different (one for each component of $\bm{E}$ ) classical diffusion equations:
+\begin{equation}
+  \vlap \bm{E} = \mu\sigma \frac{\partial \bm{E}}{\partial t},
+\end{equation}
+with diffusion constant $D = 1/\mu\sigma$. 
+
+\subsection{Homogeneous transmission line}
+For the electric current $i(x,t)$ and the voltage $u(x,t)$ along a homogeneous transmission line, apply the following differential equations:
+\begin{align}
+  -\frac{\partial u}{\partial x} &= R'i + L' \frac{\partial i}{\partial t} \\
+  -\frac{\partial i}{\partial x} &= G' u + C' \frac{\partial u}{\partial t} 
+\end{align}
+with $R', L' , G' $ and $C'$ denoting the resistance, inductance, the conductance and capacitance, per unit length, respectively of the transmition line. Eliminating either $u$ or $i$ from the set of coupled equations leads to the famous ``Telegrapher's equation'':
+\begin{equation}
+  \label{eq:telegrapherequation}
+\frac{\partial^2 f}{\partial x^2} = L'C'\frac{\partial^2 f}{\partial t^2}+ (R'C'+L'G')\frac{\partial f}{\partial t} + R'G' f
+\end{equation}
+,where $f$ can denote either $i$ or $u$. Assuming that there are no losses, i.e. $R' = 0 $ and $G' = 0$ we arrive at:
+
+\begin{equation}
+\frac{\partial^2 f}{\partial x^2} = L'C'\frac{\partial^2 f}{\partial t^2},
+\end{equation}
+which is again a one dimensional wave equation. 
+
+\section{Charge transport in semiconductors}
+\subsection*{Drift-diffusion model}
+
+The transport of carriers inside a semiconductors is most simply described in the so called drift-diffusion model, where the electric current is the sum of two different components, namely the drift current and the diffusion current. The drift current arises in responce to an applied electric field and the diffusion current is simply a result of the redistribution of carriers from regions of high concentration to regions of low concentration (i.e. diffusion) inside the semiconductor.\\\\
+\emph{Continuity equations}\\
+
+Charge conservation inside semiconductor requires that the following equations, also known as continuity equations, hold:
+\begin{align}
+  \frac{\partial n}{\partial t} &= \frac{1}{q} \div \bm{j}_n +g-r \label{eq:continuity_n_charge} ,\\
+  \frac{\partial p}{\partial t} &= -\frac{1}{q} \div \bm{j}_p +g-r \label{eq:continuity_p_charge} .
+\end{align}
+In the above system, $n$ and $p$ are the negative and positive charge densities (in units $1/m^3$), $\bm{j}_{n/p}$ the corresponding current flux densities and $g$ and $r$ the so called generation and recombination rates. $q$ is simply 
+the elementary charge, a fundamental constant equal to: $q \approx  1.602\times 10^{-19}C$. \\\\
+\emph{Convective current densities}\\
+
+In the drift-diffusion model, the current densities can be written as:
+\begin{align*}
+  \bm{j}_n &= -q \bm{v}_n n + q\Nabla (D_n n), \\
+  \bm{j}_p &=  q \bm{v}_p p - q\Nabla (D_p p).
+\end{align*}
+Here $\bm{v}_{n/p}$ denote the velocity of negative/positive charges inside the semiconducor, and $D_{n/p}$ the corresponding diffusion constants. In general both $v_{n/p}$ and $D_{n/p}$ depend on the applied electric field, but in the 
+weak field limit it can be assumed that: 
+\begin{align*}
+  \bm{v}_{n/p} = \mp \mu_{n/p} E \hspace{2cm} D_{n/p}=\mu_{n/p} \frac{k_BT}{q}  \leftarrow \text{(Einstein's relations) }. 
+\end{align*}
+Note that the parameter $\mu_{n/p}$ denotes the carrier mobility, i.e. how easily do electrons or holes respond to an applied electric field, and it has nothing to do with the magnetic permeability mentioned in the previous section.\\\\
+\emph{Total current conservation}\\
+
+Putting the expressions for the current densities into Maxwell's equations and taking the divergence yields:
+\begin{equation*}
+  \div \left ( \bm{j}_n + \bm{j}_p +\frac{\partial \bm{D}}{\partial t} \right ) = \div (\curl \bm{H}) = 0
+\end{equation*}
+From the Poisson's equation, Eq. (\ref{eq:possonequation}), we obtain:
+\begin{equation*}
+  \frac{\partial [q(n-p)]}{\partial t} = \div \left (\bm{j}_n+\bm{j}_p \right ) = -\frac{\partial \left [\div \bm{D} \right ]}{\partial t} 
+\end{equation*}
+\\\\
+\emph{Majority carrier transport (e.g. Electrons)} \\
+
+In this regime of charge transport it is assumed that one type of carriers, e.g. electrons, has a much higher density than carriers with the opposite polarity. Let us assume, now that, 
+$g = r $ and  $ n \gg p$ which is a regime of predominantly \emph{electron}  transport through a semiconductor in equilibrium (the equilibrium condition implies that $g = r $). Then the continuity
+equation takes the following form: 
+\begin{align*}
+  & \frac{\partial n }{\partial t} = \frac{1}{q}\div \bm{j}_n = -\div \bm{v}_n \cdot n-\bm{v}_n \Nabla n + D_n\cdot \lap n \\ 
+  & \frac{\partial n_1}{\partial t} = +\mu_d \cdot \div \bm{E}_1 \cdot (N_D+n_1)-(\bm{v}_0+\bm{v}_1)\cdot \div n_1+D_n\lap n_1 ,
+\end{align*}
+with 
+
+\begin{flalign*}
+\begin{cases} 
+  n = N_D +n_1(\bm r , t) \\ 
+  \bm{E} = \bm{E}_0+\bm{E}_1(\bm r,t) \\ 
+  \bm{v}_n = \bm{v}_0(\bm{E}_0)-\mu_d\cdot\bm{E}_1(\bm r,t )
+\end{cases}
+\end{flalign*}
+\emph{Weak signal regime:} ($n_1 \ll N_D$; $|\bm{v}_1|\ll |\bm{v}_0|$)
+
+\begin{equation*}
+  \frac{\partial n_1}{\partial t}=-\frac{q\mu_d N_D}{\epsilon}\cdot n_1-\bm{v}_0\cdot \Nabla n_1 + D_n \lap n_1
+\end{equation*}
+\\\\
+\emph{Minority carrier transport:} \\
+
+Charge neurtrality via relaxation of majority carriers: $\bm{E}_1 = 0$, to this assume no relaxation of the minority carriers. Often one can also neglect the drift-field, thus $\bm{E}_0 = 0$; and $\bm{v}_0 = 0$. Plugging all of this ito the continuity equation we get: 
+
+\begin{equation}
+  \label{eq:diffusionequation}
+  \frac{\partial n}{\partial t}  = D_n \cdot \lap n.
+\end{equation}
+This is the so called ``diffusion'' equation. 
+
+\section{Thermodynamics}
+
+In the theory of thermodynamics one of the fundamental equations, equivallent to energy/mass conservation equation is the continuity equation for equation for heat:
+\begin{equation*}
+  \frac{\partial w}{\partial t} = \rho \cdot \frac{\partial h}{\partial t} = -\div \bm{j}_w +p, 
+\end{equation*}
+where $w$ denotes the heat energy density (in units energy per unit volume), $\rho$ the mass density, $h$ the Enthalpy $(dh = c_p\cdot dT)$, $\bm{j}_w$ the energy flux density and $p$ the heat source density. For the energy flux density we can write: 
+\begin{equation*}
+  \bm{j}_w = \underbrace{\rho \cdot \bm{v} \cdot h}_{\text{convection}} - \underbrace{\lambda \cdot \Nabla T}_{\text{heat conduction}}.
+\end{equation*}
+Thus we have:
+\begin{equation*}
+   \rho \cdot \frac{\partial h}{\partial t} = -\div (\rho \cdot \bm{v} \cdot h) + \div (\lambda \cdot \Nabla T)  +p.  
+\end{equation*}
+Without convection or any heat sources, i.e. ($\bm{v} = 0 $ and $p = 0$), we have:
+
+\begin{align}
+  \rho \cdot c_p \cdot \frac{\partial T}{\partial t} &= \div (\lambda \cdot \Nabla T)  \text{ and especially if } \lambda = \text{const} \Rightarrow \\
+  \lap T &= \frac{\rho \cdot c_p}{\lambda}\frac{\partial T}{\partial t}, 
+\end{align}
+which is the heat conduction equation or also Fourier's law of heat conduction. 
+
+
+\section {Schr\"odinger equation}
+
+In the microscopic domain, the behaviour of elementary particles (electrons, protons, neutrons etc.) is described by the so called Schr\"odinger equation. It was first formulated in 1925 by the Austrian physicis Erwin Schr\"odinger and it is widely considered as the equivallent of Newton's equations for quantum mechanical particles. Since it is valid in a more fundamental level than classical physics, Schr\"odinger's equation cannot be strictly derived from it, however a general schematic of how one can obtain this fundamental law, will be outlined in what follows. 
+
+From classical theory we know that the total energy of a particle with mass $m$ is the sum of its kinetic and potential energy ($V(\bm{r})$): 
+\begin{equation} \label{eq:hamiltonequation}
+  E = \frac{\bm{p}^2}{2m}+V(\bm{r}), 
+\end{equation}
+where $\bm{p}$ is  just the momentum of the particle. 
+
+A year before Schr\"odinger formulated his famous equation, the french physicist Luis de Broigle, postulated that matter may, in some special conditions, exhibit wave-like behaviour (he based this conjecture on previously observed
+experimental results). Furthermore, he held that the wavelength of such a matter wave is related to its momentum by the following relation (famously known as the de Broigle relation) : $\lambda = h/p$, where $h$ is the famous Planck's constant. In a more general framework one can relate the vector momentum $\bm{p}$ to the wave vector $\bm{k}$ of the matter wave, as well as its frequency $\nu$ to its energy $E$ as: 
+\begin{align}
+  \bm{p} &= h \bm{k}, \nonumber \\
+  E &= h \nu  \label{eq:debroiglerelations}.
+\end{align}
+
+Now assuming that this matter wave can be written down as a simple plane wave $\Psi(\bm{r},t) = \Psi_0 \times e^{i(\bm{k}\cdot \bm{r}-\omega t)}$ , with amplitude $\Psi_0$, angular frequency $\omega$ and angular wave vector $\bm{k}$ , one can easily verify the following relations:
+\begin{alignat}{2}
+  \frac{\partial \Psi}{\partial t} &= -i\omega \cdot \Psi &\quad \Rightarrow \omega &= i\frac{\partial }{\partial t}, \nonumber \\ 
+  \Nabla \Psi &= i\bm{k}\cdot\Psi &\quad \Rightarrow \bm{k} &= -i\Nabla. \label{eq:firstquantization}
+\end{alignat}
+
+Now using the above correspondences, Eq. (\ref{eq:firstquantization}), the de Broigle relations, Eq. (\ref{eq:debroiglerelations}), and the energy equation, Eq. (\ref{eq:hamiltonequation}), we arrive at:
+\begin{equation}
+  \label{eq:schroedingerequation}
+  i\hbar \frac{\partial \Psi}{\partial t} = -\frac{\hbar}{2m}\lap \Psi + V(\bm{r})\cdot \Psi,
+\end{equation}
+where $\hbar = h/2\pi$ is the so called reduced Planck's constant. Note that now the energy and the momentum of the particle are not mere numbers but they are rather represented as operators, $E = i\hbar \frac{\partial }{\partial t}$ and $\bm{p}=-i\hbar \Nabla$, which act on the ``function'' $\Psi(\bm{r},t)$, the so called wave function, describing the elementary particle. 
+
+\section{General properties}
+
+The most important partial differential equations in electrical engineering and physics are, as we have seen so far, of second order. In the following lectures we will treat mainly such type of equations, which can 
+generally be written in one of the following forms:
+\begin{alignat*}{2}
+  \lap u &= -f(\bm{r}) &\quad \leftarrow &\text{ "Potential" equation }, \\
+  \lap u &= \frac{1}{c^2}\frac{\partial^2 u}{\partial^2 t} &\quad \leftarrow &\text{ "Wave" equation },\\
+  \lap u &= \frac{1}{D}\frac{\partial u}{\partial t} &\quad \leftarrow &\text{ "Diffusion" equation }.\\
+\end{alignat*}
+
+From the few examples of derivations and also from basic phyiscal considerations it is clear that the potential equation will have meaningful solutions only when correct boundary conditions are specified, whereas the wave and diffusion equations require supplementary boundary and initial conditions in order to be well-defined. 
+
